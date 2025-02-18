@@ -341,12 +341,10 @@
     }
 
     .chat-box {
-        width: 100%;
+        width: 90%;
         max-width: 100%;
         bottom: 60px;
         right: 10px;
-        overflow: hidden; /* 隐藏溢出内容 */
-        position: fixed; /* 固定页面位置 */
     }
 
     #chat-circle {
@@ -354,7 +352,18 @@
         right: 30px;
     }
 
-    
+    .chef {
+        font-size: 50px;  /* Reduce chef size for mobile */
+    }
+
+    .chef-icon {
+        font-size: 50px;
+    }
+
+    .help-text {
+        font-size: 18px;
+    }
+
     .form {
         max-width: 100%;
         padding: 10px;
@@ -367,6 +376,17 @@
 }
 
 @media (max-width: 480px) {
+    .chef {
+        font-size: 40px;  /* Further reduce chef size for small screens */
+    }
+
+    .chef-icon {
+        font-size: 40px;
+    }
+
+    .help-text {
+        font-size: 16px;
+    }
 
     .chat-box-header {
         font-size: 16px;
