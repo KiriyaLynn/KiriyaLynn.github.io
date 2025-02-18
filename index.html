@@ -23,73 +23,25 @@
             position: fixed;
             bottom: 50px;
             right: 50px;
+            width: 100px;  /* 适配视频大小 */
+            height: 100px;
             cursor: pointer;
             z-index: 1000;
             display: flex;
             justify-content: center;
             align-items: center;
-        }
-
-        .chef {
-            font-size: 70px;  /* Reduced size */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            background-color: rgb(136, 38, 27); /* Bubble color */
-            border-radius: 50%;
-            padding: 20px; /* Space inside the bubble */
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5); /* Shadow for a floating effect */
-        }
-
-        .pan {
-            width: 60px;  /* Reduced pan size */
-            height: 12px;
-            background-color: #333;
-            position: absolute;
-            border-radius: 5px;
-            bottom: 0;
-            transform-origin: 50% 50%;
-            animation: flipPan 1s infinite;
-        }
-
-        @keyframes flipPan {
-            0% { transform: rotate(0deg); }
-            50% { transform: rotate(180deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .chef-icon {
-            font-size: 70px;  /* Reduced chef emoji size */
-            color: white;
-            font-weight: bold;
-        }
-
-        .help-text {
-            position: absolute;
-            top: -30px; /* Adjusted position to come out from the center of the chef's head */
-            font-size: 24px;
-            font-weight: bold;
-            color: #ff5733; /* Bright color */
-            animation: moveTextUp 3s linear infinite;
-            white-space: nowrap; /* Prevent text from wrapping */
-        }
-
-        @keyframes moveTextUp {
-            0% {
-                transform: translateY(0); /* Start from the chef's head */
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-200px); /* Move upwards */
-                opacity: 0; /* Fade away */
-            }
+            border: 3px solid #fff; /* 添加白色边框 */
+            border-radius: 50%; /* 让它保持圆形 */
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* 添加阴影 */
         }
 
 
         #chat-circle:hover {
-            animation: none;
-        }
+    animation: none;
+    transform: scale(1.2); /* 让元素变大 1.2 倍 */
+    transition: transform 0.3s ease-in-out; /* 平滑过渡 */
+}
+
 
         #chat-circle.hidden {
             display: none;
@@ -198,7 +150,7 @@
             color: white;
         }
         .buttons button:hover {
-            background: rgb(139,35,27);
+            background: rgb(216, 128, 122);
         }
         .buttons select {
             background: white;
@@ -436,15 +388,21 @@
         font-size: 16px;
     }
 }
+
+#logo-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 让视频填充整个容器 */
+    border-radius: 50%;
+}
     </style>
 </head>
 
 <body>
     <div id="chat-circle">
-        <div class="chef" id="chef">
-            <div class="chef-icon">👨‍🍳</div>
-            <div class="pan"></div>
-            <div class="help-text">NEED HELP??</div> <!-- The text that moves -->
+        
+        <video id="logo-video" autoplay loop muted playsinline>
+            <source src="logo.mp4" type="video/mp4">
         </div>
 
     </div>
@@ -484,8 +442,10 @@
     </div>
 
     <script>
+
+        
         // Trigger the text animation on clicking the chef
-        document.getElementById("chef").addEventListener("click", () => {
+        document.getElementById("logo-video").addEventListener("click", () => {
             const helpText = document.querySelector(".help-text");
             helpText.style.animation = "moveTextUp 3s linear infinite"; // Restart infinite animation if clicked
         });
@@ -530,6 +490,16 @@
                 render: function (isLoadingHistory = false) { } // Initialize the render function
             }
 
+            function scrollToBottom() {
+                const chatLogs = document.querySelector(".chat-logs");
+                if (chatLogs) {
+                    setTimeout(() => {
+                    chatLogs.scrollTop = chatLogs.scrollHeight;
+                }, 100); 
+            }
+        }
+
+
             // Load chat history from localStorage
             function loadChatHistory() {
                 messagesContainer.innerHTML = ""; // Clear the chat logs
@@ -553,6 +523,7 @@
                 if (savedState) {
                     statemachine.currentState = savedState;
                 }
+                scrollToBottom();
                 return history.length > 0;
             }
 
@@ -575,6 +546,7 @@
                 }
 
                 localStorage.setItem("chatHistory", JSON.stringify(history));
+                scrollToBottom();
             }
 
             // Save the current state to localStorage
@@ -1312,6 +1284,8 @@
 
                 return form;
             }
+
+            
 
             // Function to create radio buttons
             function createRadioGroup(option) {
