@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-    
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +8,7 @@
     <style>
         html,
         body {
+            background: #efefef;
             height: 100%;
             margin: 0;
             display: flex;
@@ -48,9 +49,7 @@
 
         .chat-box {
             display: none;
-            background: url(./bg.jpg);
-            background-size:cover;
-            background-position: center;
+            background: url('./bg.jpg') no-repeat center center;
             position: fixed;
             right: 30px;
             bottom: 50px;
@@ -226,7 +225,7 @@
         .cm-msg-text {
         max-width: 70%; /* Limit the maximum width */
         padding: 8px;
-        background-color: #f9f9f9; /* Background color */
+        background-color: #ddd; /* Background color */
         border-radius: 10px; /* Rounded corners */
         margin-right: 10px; /* Space to the right of the left message */
         }
@@ -300,10 +299,7 @@
         .radio-group {
             display: flex;
             flex-direction: column;
-            gap: 0px; /* 增加间距，让元素更通透 */
-            
-            padding: 5px; /* 增加内边距，让内容不显得局促 */
-            padding-top: 10px;
+            gap: 8px;
             background-color: #ffffff; /* 纯白背景，更干净 */
             border-radius: 12px; /* 让边角更柔和 */
             border: 1px solid #ddd; /* 增加轻微的边框，使其更有层次感 */
@@ -352,7 +348,7 @@
     }
 
     .chat-box {
-        width: 100%;
+        width: 90%;
         max-width: 100%;
         bottom: 60px;
         right: 10px;
@@ -361,10 +357,11 @@
     }
 
     .chat-box-body {
-    overflow-x: hidden; /* 禁用水平滚动 */
-    overflow-y: auto; /* 允许垂直滚动 */
-    max-height: 80vh; /* 设置最大高度 */
-    width: 80%; /* 确保宽度占满容器 */
+        overflow-x: hidden; /* 禁用水平滚动 */
+        overflow-y: auto; /* 允许垂直滚动 */
+        max-height: 80vh; /* 设置最大高度 */
+        width: 90%; /* 确保宽度占满容器 */
+         padding: 5%;
 }
 
     #chat-circle {
@@ -413,7 +410,7 @@
         <div class="chat-box-header">
             <span class="chat-box-toggle"><button class="material-icons">&times;</button></span>
 
-            <p>THE STIR BOT</p>
+            <p>Stir Food Chatbot</p>
             <button id="clearHistoryButton">&#x27f3;</button>
 
         </div>
